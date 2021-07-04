@@ -1,34 +1,31 @@
 const router = require("express").Router();
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
-const authMiddleware = require('./auth');
+const authMiddleware = require("./auth");
 
-router.post('/authenticate', (req, res) => {
-
-  if(!req.body.username || !req.body.password) {
-    res.status(500).json({message: 'Username and password required'});
-  }
-
+router.post("/authenticate", (req, res) => {
   // this is hardcorded only for test pourpose
-  if(req.body.email === 'admin' && req.body.password === 'admin'){
+  if (req.body.user === "admin" && req.body.password === "admin") {
     const user = {
-      id: '44db268a-74d4-4c15-9384-fe4707b91af3',
-      name: 'Default User',
+      id: "44db268a-74d4-4c15-9384-fe4707b91af3",
+      name: "Default User",
     };
-  
+
     return res.json({
       user,
-      token: jwt.sign(user, 'PRIVATEKEY', {expiresIn: 604800}),
+      token: jwt.sign(user, "PRIVATEKEY", { expiresIn: 604800 }),
     });
+  } else {
+    res
+      .status(500)
+      .json({ message: "Wrong combination of username or password" });
   }
-
-  res.status(500).json({message: 'Wrong combination of username or password'});
-
 });
 
 router.use(authMiddleware);
 
 const PokemonController = require("./controllers/PokemonController");
-router.get('/pokemon', PokemonController.get);
+router.get("/pokemon", PokemonController.getPokemon);
+router.get("/weaknesses/:type", PokemonController.getWeaknesses);
 
 module.exports = router;
