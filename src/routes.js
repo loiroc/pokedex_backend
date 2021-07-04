@@ -1,27 +1,11 @@
 const router = require("express").Router();
-const jwt = require("jsonwebtoken");
 
 const authMiddleware = require("./auth");
 
-router.post("/authenticate", (req, res) => {
-  // this is hardcorded only for test pourpose
-  if (req.body.user === "admin" && req.body.password === "admin") {
-    const user = {
-      id: "44db268a-74d4-4c15-9384-fe4707b91af3",
-      name: "Default User",
-    };
+const AuthenticationController = require("./controllers/AuthenticationController");
+router.post("/authenticate", AuthenticationController.authentication);
 
-    return res.json({
-      user,
-      token: jwt.sign(user, "PRIVATEKEY", { expiresIn: 604800 }),
-    });
-  } else {
-    res
-      .status(500)
-      .json({ message: "Wrong combination of username or password" });
-  }
-});
-
+// private routes
 router.use(authMiddleware);
 
 const PokemonController = require("./controllers/PokemonController");
