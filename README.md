@@ -1,7 +1,6 @@
 # pokedex_backend
 
 Simple Node.js app 
-- Hosted in: https://pokedexbackend.herokuapp.com/
 
 ### Version
 
