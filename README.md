@@ -1,7 +1,7 @@
 # pokedex_backend
 
 Simple Node.js app 
-- user: admin / password: admin
+- Hosted in: https://pokedexbackend.herokuapp.com/
 
 ### Version
 
