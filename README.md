@@ -1,6 +1,7 @@
 # pokedex_backend
 
 Simple Node.js app 
+- user: admin / password: admin
 
 ### Version
 
